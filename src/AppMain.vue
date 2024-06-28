@@ -14,8 +14,8 @@ export default{
     created(){
         axios.get('http://127.0.0.1:8000/api/project')
        .then(resp => {
-            // console.log(resp.data.response);
-            this.projects = resp.data.response;
+            // console.log(resp.data.response.data);
+            this.projects = resp.data.response.data;
         });
     }
 }
