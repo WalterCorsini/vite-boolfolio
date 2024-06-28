@@ -1,9 +1,14 @@
 <script>
 import axios from 'axios';
+import AppCard from './AppCard.vue';
 export default{
+    components:{
+        AppCard,
+    },
     data(){
         return{
             projects:[],
+
         }
     },
     created(){
@@ -17,9 +22,16 @@ export default{
 </script>
 
 <template>
-<p v-for="curProject in projects"> {{curProject.title}} </p>
+    <div class="container d-flex flex-wrap gap-3 pt-5">
+        <div v-for="curProject in projects" class="card" style="width: 18rem;">
+            <AppCard :project="curProject" />
+        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
-
+.card-img{
+    width: 100%;
+    aspect-ratio: 1;    
+}
 </style>
