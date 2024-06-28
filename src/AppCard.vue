@@ -12,14 +12,31 @@ export default{
 </script>
 
 <template>
-<div class="card" style="width: 18rem;">
+<div class="card w-100 h-50" style="width: 18rem;">
     <img class="card-img-top" :src="project.cover_image ? `${baseSrc}/${project.cover_image}` : './src/assets/img/no-img.jpg'" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">{{ project.title }}</h5>
+    <p class="card-text"> {{ project.description }}</p>
+    <div v-if="project.type">
+        <span><strong> Tipologia: </strong></span>
+        <span class="badge text-black" :style="{ backgroundColor: project.type.color}"> {{ project.type.name }}</span>
+    </div>
+    <div v-if="project.technologies">
+        <span><strong>Tecnologie: </strong></span>
+        <span v-for="technology, index in project.technologies" :key="index">
+            <span>
+                {{ technology.name }}
+            </span>
+            <span  v-if="index !== project.technologies.length - 1"> ,</span>
+        </span>
+    </div>
   </div>
 </div>
 </template>
 
 <style lang="scss" scoped>
+img{
+    width: 100%;
+    aspect-ratio: 1;
+}
 </style>
