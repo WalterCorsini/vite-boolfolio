@@ -66,11 +66,11 @@ export default {
     <!-- /card container -->
 
     <!-- pagination -->
-    <AppPagination :curPage="curPage" :numberPages="numberPages" @page-change="handlePageChange" />
+    <AppPagination :curPage="curPage" :numberPages="numberPages" @page-change="changeCurrentPage" />
     <!-- /pagination -->
 
   </div>
-  
+
 </template>
 
 <style lang="scss" scoped>
