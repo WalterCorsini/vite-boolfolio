@@ -1,12 +1,10 @@
 <script>
 import axios from 'axios';
 import AppCard from '../components/AppCard.vue';
-// import AppPagination from '../components/AppPagination.vue';
 
 export default {
   components: {
     AppCard,
-    // AppPagination,
   },
   data() {
     return {
@@ -15,13 +13,11 @@ export default {
       curPage: "",
     };
   },
-    // call function to load first page
     created() {
     this.curPage = 1;
     this.loadCurrentPage();
   },
   methods: {
-    // load Page
     loadCurrentPage() {
       axios.get('http://127.0.0.1:8000/api/project', {
         params: {
@@ -35,7 +31,6 @@ export default {
     },
 
     showPrev(){
-      console.log(this.curPage,this.numberPages);
       if(this.curPage>1){
         this.curPage--;
       }
@@ -50,7 +45,6 @@ export default {
     },
 
     changePage(direction) {
-      console.log("ciao");
             this.curPage = direction;
             this.loadCurrentPage();
     },
@@ -63,10 +57,10 @@ export default {
   <div class="container-fluid">
 
         <!-- pagination -->
-        <nav aria-label="Page navigation">
-            <ul class="pagination d-flex justify-content-center pt-5">
+        <nav aria-label="Page navigation" class="py-5">
+            <ul class="pagination d-flex justify-content-center">
 
-                <!-- show only curpage is > of 1 -->
+                <!-- disabled only curpage is = of 1 -->
                 <li class="page-item" :class="{diabled: curPage === 1}">
                     <a class="page-link" @click.prevent="showPrev()"> &leftarrow;</a>
                 </li>
@@ -76,7 +70,7 @@ export default {
                     <a class="page-link" @click.prevent="changePage(page)">{{ page }}</a>
                 </li>
 
-                <!-- show only curpage is < of lastpage -->
+                <!-- disabled only curpage is = of lastpage -->
                 <li class="page-item" :class="{ disabled: curPage === numberPages}">
                     <a class="page-link" @click.prevent="showNext()">&RightArrow;</a>
                 </li>
@@ -85,7 +79,7 @@ export default {
     <!-- /pagination -->
 
     <!-- card container -->
-    <div class="container d-flex flex-wrap gap-3 pt-5 pb-5">
+    <div class="container d-flex flex-wrap gap-3">
 
       <!-- card -->
       <div v-for="curProject in projects" class="card" style="width: 18rem;">
@@ -97,10 +91,10 @@ export default {
     <!-- /card container -->
 
         <!-- pagination -->
-        <nav aria-label="Page navigation">
-            <ul class="pagination d-flex justify-content-center pt-5">
+        <nav aria-label="Page navigation" class="py-5">
+            <ul class="pagination d-flex justify-content-center">
 
-                <!-- show only curpage is > of 1 -->
+                <!-- disabled only curpage is = of 1 -->
                 <li class="page-item" :class="{diabled: curPage === 1}">
                     <a class="page-link" @click.prevent="showPrev()"> &leftarrow;</a>
                 </li>
@@ -110,7 +104,7 @@ export default {
                     <a class="page-link" @click.prevent="changePage(page)">{{ page }}</a>
                 </li>
 
-                <!-- show only curpage is < of lastpage -->
+                <!-- disabled only curpage is = of lastpage -->
                 <li class="page-item" :class="{ disabled: curPage === numberPages}">
                     <a class="page-link" @click.prevent="showNext()">&RightArrow;</a>
                 </li>

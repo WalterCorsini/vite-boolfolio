@@ -15,7 +15,7 @@ export default{
 <template>
 
 <!-- card -->
-<router-link :to="{name : 'singleproject', params: {slug: project.slug }}">
+<router-link :to="{name : 'singleproject', params: {slug: project.slug }}" class="text-decoration-none">
 <div class="card w-100 h-50">
 
     <!-- dynamic image -->
