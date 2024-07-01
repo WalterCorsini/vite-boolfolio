@@ -27,4 +27,9 @@
     </nav>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.router-link-active  {
+    padding-bottom: 10px;
+    border-bottom: 3px solid white;
+}
+</style>
