@@ -59,7 +59,7 @@ export default {
             </ul>
 
         </div>
-        
+
         <div class="right-col col-4">
             <!-- dynamic image -->
             <img class="card-img-top" :src="project.cover_image ?
