@@ -8,16 +8,16 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-    <ul class="navbar-nav d-flex gap-3">
+    <ul class="navbar-nav d-flex gap-5">
 
       <li class="nav-item active">
-        <router-link :to="{ name: 'home'}">
+        <router-link :to="{ name: 'home'}" class="text-decoration-none text-white fs-4">
             Home
         </router-link>
       </li>
 
       <li class="nav-item">
-        <router-link :to="{ name: 'projects'}">
+        <router-link :to="{ name: 'projects'}" class="text-decoration-none text-white fs-4">
                 Progetti
             </router-link>
       </li>
@@ -25,3 +25,6 @@
   </div>
 </nav>
 </template>
+
+<style lang="scss" scoped>
+</style>

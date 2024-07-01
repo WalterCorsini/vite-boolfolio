@@ -61,25 +61,25 @@ export default {
             <ul class="pagination d-flex justify-content-center">
 
                 <!-- disabled only curpage is = of 1 -->
-                <li class="page-item" :class="{diabled: curPage === 1}">
-                    <a class="page-link" @click.prevent="showPrev()"> &leftarrow;</a>
+                <li :class="{diabled: curPage === 1}" @click.prevent="showPrev()">
+                    &leftarrow;
                 </li>
 
                 <!-- show link page and use class active when curPage === page -->
-                <li class="page-item" v-for="page in numberPages" :key="page" :class="{ active : curPage === page}">
-                    <a class="page-link" @click.prevent="changePage(page)">{{ page }}</a>
+                <li v-for="page in numberPages" :key="page" :class="{ active : curPage === page}" @click.prevent="changePage(page)">
+                    {{ page }}
                 </li>
 
                 <!-- disabled only curpage is = of lastpage -->
-                <li class="page-item" :class="{ disabled: curPage === numberPages}">
-                    <a class="page-link" @click.prevent="showNext()">&RightArrow;</a>
+                <li :class="{ disabled: curPage === numberPages}" @click.prevent="showNext()">
+                    &RightArrow;
                 </li>
             </ul>
         </nav>
     <!-- /pagination -->
 
     <!-- card container -->
-    <div class="container d-flex flex-wrap gap-3">
+    <div class="container d-flex flex-wrap gap-3 m-auto">
 
       <!-- card -->
       <div v-for="curProject in projects" class="card" style="width: 18rem;">
@@ -95,18 +95,18 @@ export default {
             <ul class="pagination d-flex justify-content-center">
 
                 <!-- disabled only curpage is = of 1 -->
-                <li class="page-item" :class="{diabled: curPage === 1}">
-                    <a class="page-link" @click.prevent="showPrev()"> &leftarrow;</a>
+                <li :class="{diabled: curPage === 1}" @click.prevent="showPrev()">
+                    &leftarrow;
                 </li>
 
                 <!-- show link page and use class active when curPage === page -->
-                <li class="page-item" v-for="page in numberPages" :key="page" :class="{ active : curPage === page}">
-                    <a class="page-link" @click.prevent="changePage(page)">{{ page }}</a>
+                <li v-for="page in numberPages" :key="page" :class="{ active : curPage === page}" @click.prevent="changePage(page)">
+                    {{ page }}
                 </li>
 
                 <!-- disabled only curpage is = of lastpage -->
-                <li class="page-item" :class="{ disabled: curPage === numberPages}">
-                    <a class="page-link" @click.prevent="showNext()">&RightArrow;</a>
+                <li :class="{ disabled: curPage === numberPages}" @click.prevent="showNext()">
+                    &RightArrow;
                 </li>
             </ul>
         </nav>
@@ -131,9 +131,31 @@ div{
     margin: 0;
     padding: 0;
 }
-.page-link{
-  background-color: black;
-  color: white;
+
+li:first-child{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
+
+li:last-child{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+li{
+  text-align: center;
+  display: inline-block;
+  width: 40px;
+  aspect-ratio: 1;
+  line-height: 40px;
+  background-color: black !important;
+  border: 1px solid gray;
+  color: white !important;
+}
+
+li.active{
+  background-color: gray !important;
+}
+
 
 </style>
