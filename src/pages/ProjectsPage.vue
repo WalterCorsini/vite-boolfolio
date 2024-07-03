@@ -1,10 +1,12 @@
 <script>
 import axios from 'axios';
 import AppCard from '../components/AppCard.vue';
+import { store } from '../store';
 
 export default {
   components: {
     AppCard,
+    store,
   },
   data() {
     return {
@@ -19,7 +21,7 @@ export default {
   },
   methods: {
     loadCurrentPage() {
-      axios.get('http://127.0.0.1:8000/api/project', {
+      axios.get(`${store.apiBaseUrl}/api/project`, {
         params: {
           page: this.curPage,
         },
@@ -61,7 +63,7 @@ export default {
       <ul class="pagination d-flex justify-content-center">
 
         <!-- disabled only curpage is = of 1 -->
-        <li :class="{ diabled: curPage === 1 }" @click.prevent="showPrev()">
+        <li :class="{ disabled: curPage === 1 }" @click.prevent="showPrev()">
           &leftarrow;
         </li>
 
