@@ -19,38 +19,36 @@ export default {
         <div class="card w-100 h-50">
 
             <!-- dynamic image -->
+            {{ project.cover_image }}
             <img class="card-img-top" :src="project.cover_image ?
                 `${baseSrc}/${project.cover_image}` :
                 './src/assets/img/no-img.jpg'" alt="Card image cap">
             <!-- /dynamic image -->
 
             <!-- card text -->
-            <div class="card-body">
+            <div class="card-body text-center">
 
                 <!-- title -->
                 <h5 class="card-title">{{ project.title }}</h5>
 
-                <!-- description -->
-                <p class="card-text"> {{ project.description }}</p>
 
                 <!-- type -->
                 <div v-if="project.type">
                     <span><strong> Tipologia: </strong></span>
-                    <span class="badge text-black" :style="{ backgroundColor: project.type.color }"> {{ project.type.name
+                    <span class="badge text-black" :style="{ backgroundColor: project.type.color }"> {{
+                        project.type.name
                         }}</span>
                 </div>
                 <!-- /type -->
 
                 <!-- technologies -->
-                <div v-if="project.technologies">
-                    <span><strong>Tecnologie: </strong></span>
-                    <span v-for="technology, index in project.technologies" :key="index">
-                        <span>
-                            {{ technology.name }}
-                        </span>
-                        <span v-if="index !== project.technologies.length - 1"> ,</span>
-                    </span>
-                </div>
+                <span><strong>Tecnologie: </strong></span>
+                <span v-if="project.technologies_count > 0">
+                    {{ project.technologies_count }}
+                </span>
+                <span v-else>
+                    0
+                </span>
                 <!-- /technologies -->
 
             </div>

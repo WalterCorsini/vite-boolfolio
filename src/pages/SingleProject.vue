@@ -35,56 +35,61 @@ export default {
 
         <!-- container -->
         <div class="container mt-5 d-flex">
-            <div class="col-8">
+            <div class="row align-items-center">
 
-                <!-- title record -->
-                <p>
-                    <strong>Titolo:</strong>
-                    {{ project.title }}
-                </p>
+                <div class="col-8">
 
-                <!-- description -->
-                <p>
-                    <strong>Descrizione:</strong>
-                    {{ project.description }}
-                </p>
+                    <!-- title record -->
+                    <p>
+                        <strong>Titolo:</strong>
+                        {{ project.title }}
+                    </p>
 
-                <!-- slug -->
-                <p>
-                    <strong>Slug:</strong>
-                    {{ project.slug }}
-                </p>
+                    <!-- description -->
+                    <p>
+                        <strong>Descrizione:</strong>
+                        {{ project.description }}
+                    </p>
 
-                <!-- type -->
-                <p v-if="project.type">
-                    <strong>Type:</strong>
-                    {{ project.type.name }}
-                </p>
+                    <!-- slug -->
+                    <p>
+                        <strong>Slug:</strong>
+                        {{ project.slug }}
+                    </p>
 
-                <!-- technologies -->
-                <ul v-if="project.technologies.length > 0">
-                    <li>
-                        <strong>
-                            technologie:
-                        </strong>
-                        <ul>
-                            <li v-for="technology in project.technologies">
-                                <strong>{{ technology.name }} :</strong>
-                                {{ technology.description }}
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                    <!-- type -->
+                    <p v-if="project.type">
+                        <strong>Type:</strong>
+                        {{ project.type.name }}
+                    </p>
+
+                    <!-- technologies -->
+                    <ul v-if="project.technologies.length > 0">
+                        <li>
+                            <strong>
+                                technologie:
+                            </strong>
+                            <ul>
+                                <li v-for="technology in project.technologies">
+                                    <strong>{{ technology.name }} :</strong>
+                                    {{ technology.description }}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="right-col col-4">
+                    <!-- dynamic image -->
+                    {{ project.cover_image }}
+                    <img class="card-img-top" :src="project.cover_image ?
+                        `${baseSrc}/${project.cover_image}` :
+                        '../src/assets/img/no-img.jpg'" alt="Card image cap">
+                    <!-- /dynamic image -->
+                </div>
 
             </div>
-
-            <div class="right-col col-4">
-                <!-- dynamic image -->
-                <img class="card-img-top" :src="`${store.apiBaseUrl}/storage/${project.cover_image}`"
-                    alt="Card image cap">
-                <!-- /dynamic image -->
-            </div>
-
         </div>
         <!-- container -->
 
