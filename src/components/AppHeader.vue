@@ -22,6 +22,12 @@
                         Progetti
                     </router-link>
                 </li>
+
+                <li class="nav-item">
+                    <router-link :to="{ name: 'contact' }" class="text-decoration-none text-white fs-4">
+                        Contatti
+                    </router-link>
+                </li>
             </ul>
         </div>
     </nav>

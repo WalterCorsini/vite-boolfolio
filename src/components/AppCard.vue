@@ -19,7 +19,6 @@ export default {
         <div class="card w-100 h-50">
 
             <!-- dynamic image -->
-            {{ project.cover_image }}
             <img class="card-img-top" :src="project.cover_image ?
                 `${baseSrc}/${project.cover_image}` :
                 './src/assets/img/no-img.jpg'" alt="Card image cap">
