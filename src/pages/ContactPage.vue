@@ -96,7 +96,13 @@ export default {
                 <div class="invalid-feedback" v-if="errors.message">{{ errors.message[0] }}</div>
             </div>
 
-            <button class="btn btn-success mt-2" :class="{'disabled' : isLoading === true }" type="submit" @click.prevent="sendForm()"> clicca</button>
+            <button role="status" class="btn btn-success mt-2 d-flex gap-2" :class="{'disabled' : isLoading === true }" type="submit" @click.prevent="sendForm()">
+                <!-- controlla v-show -->
+                <span>clicca</span> <span v-show="isLoading===true" class="spinner-border text-white"></span>
+            </button>
+            <!-- <div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span> -->
+<!-- </div> -->
         </form>
 
     </div>
