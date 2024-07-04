@@ -49,7 +49,7 @@ export default {
                     <label for="lastname">Cognome</label>
                     <input type="text" name="lastname" v-model="form.lastname" class="form-control"
                         :class="{ 'is-invalid': errors.lastname }">
-                    <div class="invalid-feedback" v-if="errors.name">{{ errors.lastname[0] }}</div>
+                    <div class="invalid-feedback" v-if="errors.lastname">{{ errors.lastname[0] }}</div>
                 </div>
             </div>
 
@@ -58,14 +58,14 @@ export default {
                     <label for="email">Email</label>
                     <input type="text" name="email" v-model="form.email" class="form-control"
                         :class="{ 'is-invalid': errors.email }">
-                    <div class="invalid-feedback" v-if="errors.name">{{ errors.email[0] }}</div>
+                    <div class="invalid-feedback" v-if="errors.email">{{ errors.email[0] }}</div>
                 </div>
 
                 <div class="col">
                     <label for="phone_number">Telefono</label>
                     <input type="text" name="phone_number" class="mb-3 form-control" v-model="form.phone_number"
                         :class="{ 'is-invalid': errors.phone_number }">
-                    <div class="invalid-feedback" v-if="errors.name">{{ errors.phone_number[0] }}</div>
+                    <div class="invalid-feedback" v-if="errors.phone_number">{{ errors.phone_number[0] }}</div>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@ export default {
                 <label for="message">Messaggio: </label>
                 <textarea name="message" id="message" cols="30" rows="10" v-model="form.message"
                     :class="{ 'is-invalid': errors.message }"></textarea>
-                <div class="invalid-feedback" v-if="errors.name">{{ errors.message[0] }}</div>
+                <div class="invalid-feedback" v-if="errors.message">{{ errors.message[0] }}</div>
             </div>
 
             <button class="btn btn-success mt-2" type="submit" @click.prevent="sendForm()"> clicca</button>
