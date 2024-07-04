@@ -12,30 +12,38 @@ export default {
                 message: "",
             },
             store,
-            errors: []
+            errors: [],
+            isSend: false,
+            isLoading: false
         }
     },
     methods: {
         sendForm() {
+            this.isLoading = true;
             axios.post(`${this.store.apiBaseUrl}/api/leads`, this.form)
                 .then((resp) => {
                     this.resetInput();
+                    this.isSend = true;
+                    this.isLoading = false;
+                    setTimeout(() => {
+                        this.isSend = false;
+                    }, 5000);
                 })
                 .catch((err) => {
                     if (err.response.status === 422) {
-                    console.log(err);
+                        console.log(err);
                         // console.log(err.response.data.errors);
                         this.errors = err.response.data.errors;
                     }
                 });
         },
-        resetInput(){
+        resetInput() {
             console.log("ciao");
-            this.form.name ="";
-            this.form.lastname ="";
-            this.form.email ="";
-            this.form.phone_number ="";
-            this.form.message ="";
+            this.form.name = "";
+            this.form.lastname = "";
+            this.form.email = "";
+            this.form.phone_number = "";
+            this.form.message = "";
         }
     }
 }
@@ -45,6 +53,9 @@ export default {
 
     <div class="container m-auto p-5">
         <h1 class="text-center">contatti</h1>
+        <div v-if="isSend === true" class="alert alert-success text-center">
+            messaggio inviato correttamente
+        </div>
         <form>
             <div class="row container">
                 <div class="col">
@@ -85,7 +96,7 @@ export default {
                 <div class="invalid-feedback" v-if="errors.message">{{ errors.message[0] }}</div>
             </div>
 
-            <button class="btn btn-success mt-2" type="submit" @click.prevent="sendForm()"> clicca</button>
+            <button class="btn btn-success mt-2" :class="{'disabled' : isLoading === true }" type="submit" @click.prevent="sendForm()"> clicca</button>
         </form>
 
     </div>
@@ -94,4 +105,3 @@ export default {
 </template>
 
 <style lang="scss" scoped></style>
-
