@@ -82,7 +82,7 @@ export default {
     <!-- /pagination -->
 
     <!-- card container -->
-    <div class="container d-flex flex-wrap gap-3 m-auto">
+    <div class="container d-flex justify-content-center flex-wrap gap-3 m-auto">
 
       <!-- card -->
       <div v-for="curProject in projects" class="card" style="width: 18rem;">
