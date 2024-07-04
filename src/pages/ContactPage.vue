@@ -19,14 +19,23 @@ export default {
         sendForm() {
             axios.post(`${this.store.apiBaseUrl}/api/leads`, this.form)
                 .then((resp) => {
-                    console.log(resp);
+                    this.resetInput();
                 })
-                .catch((error) => {
-                    if (error.response.status === 422) {
-                        console.log(error.response.data.errors);
-                        this.errors = error.response.data.errors;
+                .catch((err) => {
+                    if (err.response.status === 422) {
+                    console.log(err);
+                        // console.log(err.response.data.errors);
+                        this.errors = err.response.data.errors;
                     }
                 });
+        },
+        resetInput(){
+            console.log("ciao");
+            this.form.name ="";
+            this.form.lastname ="";
+            this.form.email ="";
+            this.form.phone_number ="";
+            this.form.message ="";
         }
     }
 }
