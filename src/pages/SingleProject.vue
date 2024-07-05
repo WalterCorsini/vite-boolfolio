@@ -19,7 +19,6 @@ export default {
             .catch((error) => {
                 if (error.response.status === 404) {
                     console.log("no project");
-                    // window.location.href = '/notfound';
                     this.$router.push({ name: 'notfound' });
                 }
             });

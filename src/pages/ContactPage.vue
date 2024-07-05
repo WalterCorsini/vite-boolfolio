@@ -20,30 +20,26 @@ export default {
     },
     methods: {
         sendForm() {
-    this.errors = [];
-    this.isLoading = true;
-    console.log('Invio form iniziato');
-    axios.post(`${store.apiBaseUrl}/api/leads`, this.form)
-        .then((resp) => {
-            console.log('Risposta ricevuta:', resp);
-            this.isLoading = false;
-            this.isSend = true;
-            this.resetInput();
-            setTimeout(() => {
-                this.isSend = false;
-                console.log('Timeout completato'); 
-            }, 5000);
-        })
-        .catch((err) => {
-            this.isLoading = false;
-            if (err.response && err.response.status === 422) {
-                console.log(err);
-                this.errors = err.response.data.errors;
-            }
-        });
-},
+            this.errors = [];
+            this.isLoading = true;
+            axios.post(`${store.apiBaseUrl}/api/leads`, this.form)
+                .then((resp) => {
+                    this.isLoading = false;
+                    this.isSend = true;
+                    this.resetInput();
+                    setTimeout(() => {
+                        this.isSend = false;
+                    }, 5000);
+                })
+                .catch((err) => {
+                    this.isLoading = false;
+                    if (err.response && err.response.status === 422) {
+                        this.errors = err.response.data.errors;
+                    }
+                });
+        },
+        //  reset form value
         resetInput() {
-            console.log("Reset input");
             this.form.name = "";
             this.form.lastname = "";
             this.form.email = "";
@@ -58,9 +54,13 @@ export default {
 
     <div class="container m-auto p-5">
         <h1 class="text-center">contatti</h1>
+
+        <!-- message send correct form -->
         <div v-if="isSend === true" class="alert alert-success text-center">
             messaggio inviato correttamente
         </div>
+        <!-- /message send correct form -->
+
         <form>
             <div class="row container">
                 <div class="col">
