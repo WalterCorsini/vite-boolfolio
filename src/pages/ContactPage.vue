@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+
 export default {
     data() {
         return {
@@ -14,31 +15,35 @@ export default {
             store,
             errors: [],
             isSend: false,
-            isLoading: false
+            isLoading: false,
         }
     },
     methods: {
         sendForm() {
-            this.isLoading = true;
-            axios.post(`${this.store.apiBaseUrl}/api/leads`, this.form)
-                .then((resp) => {
-                    this.resetInput();
-                    this.isSend = true;
-                    this.isLoading = false;
-                    setTimeout(() => {
-                        this.isSend = false;
-                    }, 5000);
-                })
-                .catch((err) => {
-                    if (err.response.status === 422) {
-                        console.log(err);
-                        // console.log(err.response.data.errors);
-                        this.errors = err.response.data.errors;
-                    }
-                });
-        },
+    this.errors = [];
+    this.isLoading = true;
+    console.log('Invio form iniziato');
+    axios.post(`${store.apiBaseUrl}/api/leads`, this.form)
+        .then((resp) => {
+            console.log('Risposta ricevuta:', resp);
+            this.isLoading = false;
+            this.isSend = true;
+            this.resetInput();
+            setTimeout(() => {
+                this.isSend = false;
+                console.log('Timeout completato'); 
+            }, 5000);
+        })
+        .catch((err) => {
+            this.isLoading = false;
+            if (err.response && err.response.status === 422) {
+                console.log(err);
+                this.errors = err.response.data.errors;
+            }
+        });
+},
         resetInput() {
-            console.log("ciao");
+            console.log("Reset input");
             this.form.name = "";
             this.form.lastname = "";
             this.form.email = "";
@@ -74,35 +79,45 @@ export default {
             </div>
 
             <div class="row container">
+
+                <!-- email -->
                 <div class="col">
                     <label for="email">Email</label>
                     <input type="text" name="email" v-model="form.email" class="form-control"
                         :class="{ 'is-invalid': errors.email }">
                     <div class="invalid-feedback" v-if="errors.email">{{ errors.email[0] }}</div>
                 </div>
+                <!-- /email -->
 
+                <!-- phone_number -->
                 <div class="col">
                     <label for="phone_number">Telefono</label>
                     <input type="text" name="phone_number" class="mb-3 form-control" v-model="form.phone_number"
                         :class="{ 'is-invalid': errors.phone_number }">
                     <div class="invalid-feedback" v-if="errors.phone_number">{{ errors.phone_number[0] }}</div>
                 </div>
+                <!-- /phone_number -->
             </div>
 
+            <!-- message -->
             <div class="row container">
                 <label for="message">Messaggio: </label>
                 <textarea name="message" id="message" cols="30" rows="10" v-model="form.message"
                     :class="{ 'is-invalid': errors.message }"></textarea>
                 <div class="invalid-feedback" v-if="errors.message">{{ errors.message[0] }}</div>
             </div>
+            <!-- /message -->
 
-            <button role="status" class="btn btn-success mt-2 d-flex gap-2" :class="{'disabled' : isLoading === true }" type="submit" @click.prevent="sendForm()">
-                <!-- controlla v-show -->
-                <span>clicca</span> <span v-show="isLoading===true" class="spinner-border text-white"></span>
+            <!-- button -->
+            <button role="status" class="btn btn-success mt-2 d-flex gap-2" :class="{ 'disabled': isLoading === true }"
+                type="submit" @click.prevent="sendForm()">
+                <span>
+                    clicca
+                </span>
+                <span v-show="isLoading === true" class="spinner-border text-white"></span>
             </button>
-            <!-- <div class="spinner-border text-primary" role="status">
-  <span class="visually-hidden">Loading...</span> -->
-<!-- </div> -->
+            <!-- /button -->
+
         </form>
 
     </div>
