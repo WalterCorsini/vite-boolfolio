@@ -33,6 +33,7 @@ export default {
                 })
                 .catch((err) => {
                     this.isLoading = false;
+                    console.log(err);
                     if (err.response && err.response.status === 422) {
                         this.errors = err.response.data.errors;
                     }
