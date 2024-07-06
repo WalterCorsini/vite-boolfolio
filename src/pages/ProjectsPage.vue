@@ -34,7 +34,6 @@ export default {
 
       // params Type
       if (this.selectedType !== "") {
-        console.log("ciao");
         params.type_id = this.selectedType;
       }
 
@@ -47,7 +46,7 @@ export default {
       axios.get(`${store.apiBaseUrl}/api/project`, {
         params,
       })
-      // resp
+        // resp
         .then(response => {
           this.projects = response.data.response.data;
           this.numberPages = response.data.response.last_page;
@@ -100,7 +99,7 @@ export default {
   <div class="container-fluid">
 
     <div class="pt-2 text-center d-flex gap-2 justify-content-center">
-      
+
       <!-- Filter Type -->
       <form action="">
         <select aria-label="Seleziona tipologia" @change="loadCurrentPage()" v-model="selectedType">
