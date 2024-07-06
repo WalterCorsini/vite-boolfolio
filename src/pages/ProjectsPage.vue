@@ -12,40 +12,65 @@ export default {
     return {
       projects: [],
       types: [],
+      technologies: [],
       numberPages: 1,
       curPage: "",
-      selectedCategory:"",
+      selectedType: "",
+      selectedTechnology: "",
     };
   },
   created() {
     this.curPage = 1;
     this.loadCurrentPage();
+    this.listTypes();
+    this.listTechnologies();
   },
   methods: {
     loadCurrentPage() {
+      // params curPace
       const params = {
         page: this.curPage,
       }
-      if(this.selectedCategory !== ""){
-        params.type_id = this.selectedCategory;
+
+      // params Type
+      if (this.selectedType !== "") {
+        console.log("ciao");
+        params.type_id = this.selectedType;
       }
-      axios.get(`${store.apiBaseUrl}/api/project`, { 
+
+      // params Technology
+      if (this.selectedTechnology !== "") {
+        params.technology_id = this.selectedTechnology;
+      }
+
+      // call
+      axios.get(`${store.apiBaseUrl}/api/project`, {
         params,
       })
+      // resp
         .then(response => {
-          this.selectedTypes();
           this.projects = response.data.response.data;
           this.numberPages = response.data.response.last_page;
         });
     },
 
-    selectedTypes() {
+    // list Type
+    listTypes() {
       axios.get(`${store.apiBaseUrl}/api/types`)
         .then(response => {
           this.types = response.data.results;
         });
     },
 
+    // list Technologies
+    listTechnologies() {
+      axios.get(`${store.apiBaseUrl}/api/technologies`)
+        .then(response => {
+          this.technologies = response.data.results;
+        });
+    },
+
+    // previous page
     showPrev() {
       if (this.curPage > 1) {
         this.curPage--;
@@ -53,6 +78,7 @@ export default {
       this.loadCurrentPage();
     },
 
+    // next page
     showNext() {
       if (this.curPage < this.numberPages) {
         this.curPage++;
@@ -60,6 +86,7 @@ export default {
       this.loadCurrentPage();
     },
 
+    // change page on click
     changePage(direction) {
       this.curPage = direction;
       this.loadCurrentPage();
@@ -72,15 +99,25 @@ export default {
 <template>
   <div class="container-fluid">
 
-    <div class="pt-2 text-center">
+    <div class="pt-2 text-center d-flex gap-2 justify-content-center">
+      
       <!-- Filter Type -->
-       <form action="">
-       <select aria-label="Seleziona tipologia" @change="loadCurrentPage()" v-model="selectedCategory">
-         <option value="">Filtra per Tipologia</option>
-         <option :value="type.id" v-for="(type) in types">{{ type.name }}</option>
-       </select>
-       </form>
+      <form action="">
+        <select aria-label="Seleziona tipologia" @change="loadCurrentPage()" v-model="selectedType">
+          <option value="">Filtra per Tipologia</option>
+          <option :value="type.id" v-for="(type) in types">{{ type.name }}</option>
+        </select>
+      </form>
       <!-- Filter Type -->
+
+      <!-- Filter Technology -->
+      <form action="">
+        <select aria-label="Seleziona tecnologia" @change="loadCurrentPage()" v-model="selectedTechnology">
+          <option value="">Filtra per Tecnologia</option>
+          <option :value="technology.id" v-for="(technology) in technologies">{{ technology.name }}</option>
+        </select>
+      </form>
+      <!-- Filter Technology -->
     </div>
 
     <!-- pagination -->
