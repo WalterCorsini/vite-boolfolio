@@ -11,8 +11,10 @@ export default {
   data() {
     return {
       projects: [],
+      types: [],
       numberPages: 1,
       curPage: "",
+      selectedCategory:"",
     };
   },
   created() {
@@ -21,14 +23,26 @@ export default {
   },
   methods: {
     loadCurrentPage() {
-      axios.get(`${store.apiBaseUrl}/api/project`, {
-        params: {
-          page: this.curPage,
-        },
+      const params = {
+        page: this.curPage,
+      }
+      if(this.selectedCategory !== ""){
+        params.type_id = this.selectedCategory;
+      }
+      axios.get(`${store.apiBaseUrl}/api/project`, { 
+        params,
       })
         .then(response => {
+          this.selectedTypes();
           this.projects = response.data.response.data;
           this.numberPages = response.data.response.last_page;
+        });
+    },
+
+    selectedTypes() {
+      axios.get(`${store.apiBaseUrl}/api/types`)
+        .then(response => {
+          this.types = response.data.results;
         });
     },
 
@@ -58,6 +72,17 @@ export default {
 <template>
   <div class="container-fluid">
 
+    <div class="pt-2 text-center">
+      <!-- Filter Type -->
+       <form action="">
+       <select aria-label="Seleziona tipologia" @change="loadCurrentPage()" v-model="selectedCategory">
+         <option value="">Filtra per Tipologia</option>
+         <option :value="type.id" v-for="(type) in types">{{ type.name }}</option>
+       </select>
+       </form>
+      <!-- Filter Type -->
+    </div>
+
     <!-- pagination -->
     <nav aria-label="Page navigation" class="py-5">
       <ul class="pagination d-flex justify-content-center">
@@ -80,6 +105,7 @@ export default {
       </ul>
     </nav>
     <!-- /pagination -->
+
 
     <!-- card container -->
     <div class="container d-flex justify-content-center flex-wrap gap-3 m-auto">

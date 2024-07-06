@@ -1,4 +1,14 @@
 <script>
+import axios from 'axios';
+import { store } from '../store'
+export default{
+    data(){
+        return{
+            selectedCategory:"",
+            store
+        }
+    },
+}
 </script>
 
 <template>
@@ -8,6 +18,8 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav d-flex gap-5">
 
